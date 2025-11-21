@@ -32,6 +32,14 @@ function twoSumm2 (numbers, target) {
     let right = numbers.length - 1;
 
     while (left < right) {   // this condition will stop the while loop after comparing all numbers however we will have a solution by then since one is garenteed.
-
+        const sum = numbers[left] + numbers[right];
+        
+        if (sum === target) {
+            return [left + 1, right + 1];
+        }
+        sum < target ? left++ : right--;
     }
 }
+
+// Solution has a constant amount of space O(1)
+// Solution has a linear amount of time O(n) will only review each item in the array once
