@@ -27,22 +27,49 @@ strs[i] contains only UTF-8 characters.
 
 function encode (strs) {
     // create a res variable
+    let res = '';
     // loop through the strs
-    // add "str length + # + str"
+    for (let word of strs) {
+        // add "str length + # + str"
+        res += `${word.length}#${word}`
+    }
+    return res;
+
+    // Space of O(n * k) because the encoded string grows with the total input size
+    // Time of O(n * k) because each word is processed once / every character in every word is processed once
 }
 
 function decode (strs) {
-    const res = [];
-    let pointer = strs.indexOf('#');
-    console.log(pointer)
+    let res = [];
+    let pointer = 0;
 
-    while (strs.length > 0) {
-        let count = parseInt(strs.slice(0, pointer)) + 2;
-        res.push(strs.slice(pointer + 1, count))
-        strs = strs.slice(count + 1, strs.length)
-    };
+    while (pointer < strs.length) {
+        let num = ''
+
+        while (strs[pointer] !== '#') {
+            num += strs[pointer];
+            pointer++;
+        }
+        num = parseInt(num);
+        pointer++;
+
+        res.push(strs.slice(pointer, pointer + num))
+        pointer = pointer + num;
+    }
     return res;
-
+    
+    // Space of O(n) because we will be storing all characters in the result array a max of one time
+    // Time of O(n) not squared because even though there is a nested loop both loops move forward based on the location of the pointer
+        // and the pointer never goes backwards. So each character is processed only once
 }
 
-console.log(decode('10#catdogcows6#mouses'))
+
+let string = ["neet","code","love","you"];
+console.log(encode(string))
+let encoded = encode(string)
+
+console.log(decode(encoded))
+
+
+
+
