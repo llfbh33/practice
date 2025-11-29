@@ -91,4 +91,45 @@ function productExceptSelf3(nums) {
 }
 
 let array = [1, 2, 4, 6, 3];
-console.log(productExceptSelf3(array))
+// console.log(productExceptSelf3(array))
+
+
+
+
+
+
+
+
+// input: array of nums   --> [1,2,4,6]
+// outpus: array where output[i] is the product of all nums except nums[i]   --> [48,24,12,8]
+
+
+
+function products(nums) {
+    const n = nums.length;
+    const res = new Array(n);
+    // make a prefix and suffix array the same length as nums
+    const pref = new Array(n);
+    const suff = new Array(n);
+    // set the first index of pref and last index of suff 1 as we will start with no pref and end with no suff
+    pref[0] = 1;
+    suff[n - 1] = 1;
+
+    // fill in the numbers for pref by looping, start at 1 since we need the values at 0 to multiply together
+    for (let i = 1; i < n; i++) {
+        pref[i] = nums[i - 1] * pref[i - 1];
+    };
+
+    // fill in the numbers for suff by looping backwards, multiplying as we go
+    for (let i = n - 2; i >= 0; i--) {
+        suff[i] = nums[i + 1] * suff[i + 1];
+    };
+
+    // take the values and multiply them together to get the result
+    for (let i = 0; i < n; i++) {
+        res[i] = pref[i] * suff[i]
+    }
+    return res;
+}   
+
+console.log(products([1,2,4,6]))
