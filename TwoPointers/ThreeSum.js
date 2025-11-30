@@ -49,7 +49,7 @@ function threeSum(nums) {
     let res = [];
     // loop through all the nums
     for (let i = 0; i < nums.length; i++) {
-    // save each number in the set with a value of the amount of times it shows up
+        // save each number in the set with a value of the amount of times it shows up
         map[nums[i]] ? map[nums[i]] += 1 : map[nums[i]] = 1;
     }
     // exit loop
@@ -80,7 +80,7 @@ function threeSum(nums) {
     // Space of O(n) because we will be storing each number once in the map and will not be returning any duplicates in res
 }
 
-let nums = [-1,0,1,2,-1,-4];
+let nums = [-1, 0, 1, 2, -1, -4];
 console.log(threeSum(nums))
 
 
@@ -95,7 +95,7 @@ function threeSum2(nums) {
         // if nums[i] > 0 we know that there are no more solutions which add to 0 so we break
         if (nums[i] > 0) break;
         // continue if i is greater than 0 and it is the same as the prev
-        if (i > 0 && nums[i] === nums[i - 1]) continue; 
+        if (i > 0 && nums[i] === nums[i - 1]) continue;
         // use the two pointer method for the remaining nums in the array
         let left = i + 1;
         let right = nums.length - 1;
@@ -104,18 +104,29 @@ function threeSum2(nums) {
         while (left < right) {
             // add up nums at i, left, and right
             let sum = nums[i] + nums[left] + nums[right];
-            // if sum is 0 push into res
-            if (sum === 0) res.push([nums[i], nums[left], nums[right]])
-            // move left if less than or equal to 0
+            // move left if less than to 0
+            if (sum < 0) left += 1;
             // move right if more than 0
-            sum <= 0 ? left += 1 : right -= 1;
+            else if (sum > 0) right -= 1;
+            // if sum is 0 push into res
+            else if (sum === 0) {
+                res.push([nums[i], nums[left], nums[right]])
+                left += 1;
+                right -= 1;
+                while (left < right && nums[left] === nums[left - 1]) {  // does not add to the time because it is just moving through what the outer while loop would have
+                    // also works to skip over any duplicates which sorting is able to determin exist easily for us
+                    left += 1;
+                }
+            } 
         }
     }
+    // double check that the entries are unique.  maybe should have saved them in a set originaly then changed to an array
     return res;
     // Time of O(n²) because of the nested loops, the pointer makes it so we look at the numbers max n * n times
     // Space of O(m) because we could have a max amount of arrays based on the nums included
-        // we use m to represent the returned triplicates since n was already 'declaired'
-        // O(1) constant space for the auxiliary space / extra variables and pointers
-}   
+    // we use m to represent the returned triplicates since n was already 'declaired'
+    // O(1) constant space for the auxiliary space / extra variables and pointers
+}
 
-console.log(threeSum2(nums))
+let nums2 = [0, 0, 0, 0]
+console.log(threeSum2(nums2))
