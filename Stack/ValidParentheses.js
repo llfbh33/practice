@@ -59,5 +59,5 @@ function isValid(s) {
     // Time of O(n) because we are looping through each number max one time
 }
 
-let s="([{}])"
+let s="([{}]))"
 console.log(isValid(s))
