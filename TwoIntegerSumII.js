@@ -43,3 +43,4 @@ function twoSumm2 (numbers, target) {
 
 // Solution has a constant amount of space O(1)
 // Solution has a linear amount of time O(n) will only review each item in the array once
+// Uses a two point solution

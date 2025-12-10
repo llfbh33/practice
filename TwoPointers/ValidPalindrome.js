@@ -36,9 +36,9 @@ s is made up of only printable ASCII characters.
 // Space of O(1) because all created variables are constant
 // time of O(n) because we will be looking at each character once
 
-function isAlphanumeric(char) {
-    // replace all non alphanumeric characters with ''
-    let string = char.replace(/[^a-zA-Z0-9]/g, '');
+function isAlphanumeric(s) {
+    // replace all non alphanumeric sacters with ''
+    let string = s.replace(/[^a-zA-Z0-9]/g, '');
     let lower = string.toLowerCase();
     let left = 0;
     let right = lower.length - 1;

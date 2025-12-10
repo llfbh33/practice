@@ -121,17 +121,22 @@ function longestConsec(nums) {
         if (!map.has(num)) {  // if the current number does not exist as a key in map
             map.set(    // set the number in the map as a key if it doesn't exist
                 num,
-                (map.get(num - 1) || 0) + (map.get(num + 1) || 0) + 1   // if there is a number +1 or -1 in the map add 1 for each and itself(max 3)
+                (map.get(num - 1) || 0) + (map.get(num + 1) || 0) + 1   // if there is a number +1 or -1 in the map add the value of each and one for the num
             )
-            // console.log(map)
+            // update the number x times below num to have the same value incase num has a hihgher value
+            // we need to make sure that the lowest number in the sequence has the proper updated sequence length
             map.set(num - (map.get(num - 1) || 0), map.get(num));
-            // console.log('two', map)
+            // update the number x times above num to have the same value incase num has a higher value
+            // depends on what the value of num + 1 is (could be 2 or 4 or 5...)
+            // we are making sure that the highest number in the sequence has the proper updated sequence length
             map.set(num + (map.get(num + 1) || 0), map.get(num));
             res = Math.max(res, map.get(num));
         }
     }
     console.log(map)
     return res;
+    // Space of O(n) because we will worst case store every number one time each
+    // Time of O(n) because we will worst case look at each number one time each, and the boundry updates are constant time operations
 };
 
 let nums = [1,3,6,3,5,2,8,9,2,0];

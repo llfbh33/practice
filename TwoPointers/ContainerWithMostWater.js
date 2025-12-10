@@ -55,6 +55,8 @@ function maxArea(heights) {
     }
     // return max
     return area;
+    // Space of O(1) only making constant variables
+    // Time of O(n) we will be looking at each number in the array once
 }
 
 let height = [1,7,2,5,4,7,3,6];   // --> 36

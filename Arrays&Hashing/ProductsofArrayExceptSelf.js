@@ -130,6 +130,8 @@ function products(nums) {
         res[i] = pref[i] * suff[i]
     }
     return res;
+    // Space O(n) because all arrays have up to n amount of spaces - O(n) + O(n) + O(n) = O(n)
+    // Time O(n) because each loop will only traverse all nums once - O(n) + O(n) + O(n) = O(n)
 }   
 
 console.log(products([1,2,4,6]))

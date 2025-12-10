@@ -34,6 +34,8 @@ const hasDuplicates = (nums) => {
     }
     // return false
     return false;
+    // space of O(n) because we could store up to all the numbers provided and the set will continue to increase
+    // time of O(n) becasue we could worst case review all numbers within the array
 }
 
 let nums = [3,5,2,7,3,5,1,2,9]
