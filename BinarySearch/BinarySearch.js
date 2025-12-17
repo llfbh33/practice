@@ -31,14 +31,12 @@ All the integers in nums are unique.
 */
 
 function search(nums, target) {
-    let idx = Math.floor(nums.length / 2);
-    if (nums[idx] === target) return idx;
-    while (nums[idx] !== target && idx >= 0 && idx < nums.length) {
-        nums[idx] > target ? idx-- : idx++;
-        console.log(idx)
+    let left = 0;
+    let right = nums.length - 1;
+
+    while (left < right) {
+        
     }
-    if (nums[idx] === target) return idx;
-    else return -1;
 }
 
 let nums = [-1,0,2,4,6,8]

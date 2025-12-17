@@ -39,11 +39,12 @@ function dailyTemperatures(temperatures) {
             while (stack.length > 0 && curr > stack[stack.length - 1][0]) {
                 const [temp, index] = stack.pop();
                 res[index] = i - index;
-                console.log(res)
             };
             stack.push([curr, i])
         }
         return res;
+        // Time of O(n) because even though we have two loops we are only working through our process with each number of the original array once
+        // Space of O(n) because the return array will hold the same amount of values as the length of the original array
 }
 
 let temperatures = [30,38,30,36,35,40,28];
