@@ -38,28 +38,33 @@ The number of nodes in the list is sz.
  }
 
 function removeNthFromEnd(head, n) {
-    const dummy = new ListNode(0, head);
-    let left = dummy;
-    let right = head;
+    const dummy = new ListNode(0, head);    // Adding a node infront of head guarantees uniform node removal (node 0 is a space holder for precision of distance, adds a safe node before head so removal never needs a special case)
+    let left = dummy;                       // Create a pointer for dummy so we don't lose dummy
+    let right = head;                       // Create a pointer for head so we do not lose head
 
-    while (n > 0) {
-        right = right.next;
-        n--;
+    while (n > 0) {                         // While n is greater than 0
+        right = right.next;                 // Set the right pointer to next inorder to create a fixed gap from the head
+        n--;                                // subtract from n
     }
 
-    while (right !== null) {
-        left = left.next;
-        right = right.next;
-    }
+    while (right !== null) {                // Right currently has a gap of n from head, shift together with left
+        left = left.next;                   // Move left pointer till right is null, maintaining the fixed gap
+        right = right.next;                 // Once right is null left.next will be the nth node
+    }                                       // Keeping right n nodes ahead means when it hits the end, left must be positioned right before the node to remove.
 
-    left.next = left.next.next;
-    return dummy.next;
+    left.next = left.next.next;             // Remove left.next from the linked list
+    return dummy.next;                      // Return from the head
 }
+// Time of O(n) If runtime grows because input grows, it’s not constant time.
+// Space: O(1) — adding a constant number of nodes (even more than one)
+// and using a few pointers does not depend on input size
+// constant means there is no dependency on input size
 
-let node = new ListNode(1);
-node.next = new ListNode(2);
-node.next.next = new ListNode(3);
-node.next.next.next = new ListNode(4);
-node.next.next.next.next = new ListNode(5);
+let node = new ListNode(1);                     // right - 4  left 
+node.next = new ListNode(2);                    // right - 3
+node.next.next = new ListNode(3);               // right - 2
+node.next.next.next = new ListNode(4);          // right - 1
+node.next.next.next.next = new ListNode(5);     // right - 0
+                                                // right = null
+console.log(removeNthFromEnd(node, 4));
 
-console.log(removeNthFromEnd(node, 4))
