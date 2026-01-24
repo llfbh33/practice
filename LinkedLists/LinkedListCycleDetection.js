@@ -68,3 +68,6 @@ function hasCycle(head) {
 }
 // Time of O(n) - fast will catch up to slow in at most a full cycle
 // Space of O(1) - we are only saving pointers, fixed space
+
+// Could also run this problem with a hash set and keep track of the nodes which have been visited before
+// This solution is clean and reliable however it would have a space of O(n) which we can do better than
