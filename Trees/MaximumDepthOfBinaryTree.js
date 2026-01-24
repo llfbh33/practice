@@ -39,12 +39,16 @@ function maxDepth(root) {
     return (
         1 + Math.max(maxDepth(root.left), maxDepth(root.right))
     )
+    // Time of O(n) because we will look at each node a max of one time
+    // Space of O(h)
+        // Best Case (balanced tree) O(log(n))
+        // Worst Case (degenerate tree) O(n) 
 }
 
 
 let tree = new TreeNode(1);
 tree.left = new TreeNode(2);
-// tree.right = new TreeNode(3);
-// tree.right.left = new TreeNode(4);
+tree.right = new TreeNode(3);
+tree.right.left = new TreeNode(4);
 
 console.log(maxDepth(tree))

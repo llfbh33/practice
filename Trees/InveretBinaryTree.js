@@ -39,26 +39,33 @@ class TreeNode {
     }
 }
 
+// Aubries first solve
 function invertTree(root) {
     // make sure root exists
     // if there is no right and left return what was provided
     // were going to make a stack
     // add the left and right to the stack 
     // switch their places in the current node
+    if (root === null || root.left === null && root.right === null) return root;
     let stack = [root];
     while (stack.length > 0) {
         let rem = stack.pop();
-        let newLeft = rem.right;
-        let newRight = rem.left;
-        rem.right = newRight;
-        rem.left = newLeft;
+        // let newLeft = rem.right !== null ? rem.right : null;  // we can reduce all this code to one line
+        // let newRight = rem.left !== null ? rem.left : null;
+        // rem.right = newRight;
+        // rem.left = newLeft;
+        [rem.right, rem.left] = [rem.left, rem.right];   // by using destructuring assignment / destructuring swap
         if (rem.left !== null) {
-            stack.push(rem.left)
+            stack.push(rem.left);
+        }
+        if (rem.right !== null) {
             stack.push(rem.right)
         }
         
     }
     return root;
+    // Time of O(n) because we will look at each node once
+    // Space of O(n) because the stack will hold up to n nodes, each of the nodes once
 }
 
 const node = new TreeNode(1);
