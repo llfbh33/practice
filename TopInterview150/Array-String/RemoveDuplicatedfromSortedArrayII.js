@@ -52,29 +52,26 @@ function removeDuplicates (nums) {                              // [0, 0, 1, 1, 
 // if count is 2 and i - 1 is the same number, move on without increasing k (this is the element you will need to replace)
 // if count is 2 and i - 1 is a different number set count to 1 and k++
 
-const removeDuplicates2 = (nums) => {
-    let k = 0;
-    let count = 0;
-    for (let i = 0; i < nums.length; i++) {
-        if (count === 0) {
-            count++;
-            k++;
-        } else if (count === 1 && nums[i] === nums[k - 1]) {
+
+// Each variable does one job, no null values
+const removeDuplicates2 = (nums) => {                   // [1, 1, 2, 3, 3, 3, 3];
+    let k = 1;                                          // 5
+    let count = 1;                                      // 2
+    for (let i = 1; i < nums.length; i++) {             // 7
+        if (count === 1 && nums[i] === nums[k - 1]) {
             nums[k] = nums[i];
             count++;
             k++
-        } else if (count === 2) {
-            if (nums[i] !== nums[k - 1]) {
-                count = 1;
-                nums[k] = nums[i];
-                k++;
-            }
+        } else if (nums[i] !== nums[k - 1]) {
+            count = 1;
+            nums[k] = nums[i];
+            k++;
         }
     }
-    return [nums, k]
+    return k
 }
 
 let nums =  [1, 1, 1, 1, 2, 3, 3];
 let nums2 = [0, 0, 1, 1, 1, 1, 2, 3, 3];
 let nums3 = [0, 0, 1, 1, 2, 2, 4, 2, 2, 4];
-console.log(removeDuplicates2(nums))
+console.log(removeDuplicates2(nums2))
