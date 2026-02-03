@@ -72,30 +72,30 @@ const rotate = (nums, k) => {
 
     let count = 0; // Keeps track of how many elements we've moved
     
-    for (let start = 0; count < n; start++) {
-        let current = start;
-        let prevValue = nums[start];
+    for (let i = 0; count < n; i++) {
+        let curr = i;
+        let prevValue = nums[i];
         
-        // This do-while loop handles one single cycle
+        // This do-while loop handles one single cycle - a do-while loop checks the condition only after an iteration has been completed
         do {
-            let nextIndex = (current + k) % n;
+            let nextIndex = (curr + k) % n; // We need to % here again because k might be close to the length of the arry
             
             // Swap the value we are carrying with the one at the next spot
-            let temp = nums[nextIndex];
-            nums[nextIndex] = prevValue;
+            let temp = nums[nextIndex];   // save the value at curr + k (the next value that will rotate)
+            nums[nextIndex] = prevValue;  // set that value to the previous value
             prevValue = temp;
             
-            current = nextIndex;
+            curr = nextIndex;
             count++;
-        } while (start !== current); // Stop when we return to the start of this cycle
+        } while (i !== curr); // Stop when we return to the i of this cycle - continue while i does not equal curr
     }
     
     return nums;
 };
 
 let nums3 = [1,2,3,4,5,6,7,8]  // [7,8,9,1,2,3,4,5,6]
-let k2 = 6;
-console.log(rotate(nums3, k2))
+let k2 = 3;
+// console.log(rotate(nums3, k2))
 
 // count = 0
 // store nums[k]
@@ -113,3 +113,33 @@ console.log(rotate(nums3, k2))
 // reduce k
 // increase count
 // store k + 1 and replace with nums[count]
+
+
+const rotate2 = (nums, k) => {
+    let n = nums.length;
+    k = k % n;
+    let count = 0;          // count is important because we are counting how many numbers are moved.
+    
+    for (let i = 0; count < n; i++) {   // count will increase with each do-while loop, which will count every time a number is swapped
+        let curr = i;                   
+        let prev = nums[i];
+
+        do {                                // Since we will be doing the same thing for each loop we want to create a cycle
+            let idx = (curr + k) % n;       // make sure to check incase k is close to the length of the array
+            let temp = nums[idx];
+
+            nums[idx] = prev;
+            prev = temp;
+
+            curr = idx;
+            count++;
+        }  while (i !== curr)           // maintain a cylce until we complete the loop, do-while so that we can run the first iteration without checking the condition
+    }
+    return nums;
+};
+// Time of O(n) - even though we have a nested loop we are only looping n times
+// Space of O(1) because we are adjusting the array inplace
+
+let nums4 = [1,2,3,4,5,6,7,8]  // [7,8,9,1,2,3,4,5,6]
+let k3 = 3;
+console.log(rotate2(nums4, k3))
