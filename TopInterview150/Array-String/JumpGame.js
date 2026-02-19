@@ -57,6 +57,8 @@ function canJump(nums) {
 // the best jump is to 3, index 6
 // we add the index to the value to see which would reach further
 
+
+// Function works for the example inputs provided by leetcode, however it is clunky and needs to be refactored
 function canJump2(nums) {
     let index = 0;                                          // 1
 
