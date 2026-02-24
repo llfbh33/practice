@@ -37,4 +37,6 @@ const levelOrder = (root) => {
         res.push(level);
     };
     return res;
-}
+};
+    // Time of O(n) add and remove up to n elements per array, using shift reindexes the array, could work up to O(n²) worst case
+// Space of O(n) storing n elements in the queue / level / results, there is no O(h) because we are not using recursion, no call stack - h is the height of the stack
