@@ -25,7 +25,7 @@
 
 
 
-const gitMinimumDifference = (root) => {
+const getMinimumDifference = (root) => {
     // create variable minDiff at infinity
     let minDiff = Infinity;
     // create a stack
