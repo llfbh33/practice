@@ -24,22 +24,77 @@ only look at the boarder, any reigon and its connected portions change to 'S'. a
 
  function solve(board) {
     // create stack
+    let stack = [];
     // create a coordinates helper function
-    // check north, update 'O' to 'S'
-    // check east, update 'O' to 'S'
-    // check sourth, update 'O' to 'S'
-    // check west, update 'O' to 'S'
-    // look through all the boarders
-    // if you find an 'O' replace with 'S'
-    // call on coordinates function to fill stack
-    // while the stack has length
-    // pop from the stack 
-    // call on the coordinates function
-    // end whle loop
-    // end the boarder checks
-    // for loop
-    // for loop
-    // if coordinates are 'S' replace with 'O'
-    // if coordinates are 'O' replace with 'S'
+    function coordinates(x, y) {
+        // check north, update 'O' to 'S'
+        if (x - 1 >= 0 && board[x - 1][y] !== undefined && board[x - 1][y] === 'O') {
+            board[x - 1][y] = 'S';
+            stack.push([x - 1, y])
+        };
+        // check east, update 'O' to 'S'
+        if (y + 1 < board[x].length && board[x][y + 1] !== undefined && board[x][y + 1] === 'O') {
+            board[x][y + 1] = 'S';
+            stack.push([x, y + 1]);
+        };
+        // check sourth, update 'O' to 'S'
+        if (x + 1 < board.length && board[x + 1][y] !== undefined && board[x + 1][y] === 'O') {
+            board[x + 1][y] = 'S';
+            stack.push([x + 1, y]);
+        };
+        // check west, update 'O' to 'S'
+        if (y - 1 >= 0 && board[x][y - 1] !== undefined && board[x][y - 1] === 'O') {
+            board[x][y - 1] = 'S';
+            stack.push([x, y - 1]);
+        };
+    };
+    // look through all the boarders - m top and bottom
+    for (let i = 0; i < board[0].length; i++) {
+        // if you find an 'O' replace with 'S'
+        if (board[0][i] === 'O') {
+            board[0][i] = 'S';
+            stack.push([0, i]);
+        };
+        if (board[board.length - 1][i] === 'O') {
+            board[board.length - 1][i] = 'S';
+            stack.push([board.length - 1, i]);
+        };
+    };
+    // Look through all the boarders - n left and right
+    for (let i = 0; i < board.length; i++) {
+        // if you find an 'O' replace with 'S'
+        if (board[i][0] === 'O') {
+            board[i][0] = 'S';
+            stack.push([i, 0]);
+        };
+        if (board[i][board[0].length - 1] === 'O') {
+            board[i][board[0].length - 1] = 'S';
+            stack.push([i, board[0].length - 1])
+        };
+    };
+    // loop through all boarder coordinates for regions
+    while (stack.length > 0) {
+        let [x, y] = stack.pop();
+        coordinates(x, y);
+    };
+    
+    for (let i = 0; i < board.length; i++) {
+        // for loop
+        for (let j = 0; j < board[i].length; j++) {
+            // if coordinates are 'O' replace with 'X'
+            if (board[i][j] === 'O') board[i][j] = 'X';
+            // if coordinates are 'S' replace with 'O'
+            else if (board[i][j] === 'S') board[i][j] = 'O';
+        }
+    };
     // do not need to return anything
+    return board;
 };
+// Time of O(m * n) because we have nested loops searching up to m * n times
+// Space of O(m * n) because we are storing up to m * n elements over all in our stack
+
+let board =
+[["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]];
+let board2 =
+[["X","X","X","X","O"],["X","O","O","X","X"],["O","X","X","X","X"]]
+console.log(solve(board2));
