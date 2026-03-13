@@ -61,23 +61,15 @@ node.next.next.next.next = new ListNode(5);
 // console.log(reverseList(node));
 
 function reverseList2(head) {
-    // set a prev pointer with a value of null
     let prev = null;
-    // set a curr pointer that points to head
     let curr = head;
-    // loop 
+
     while (curr !== null) {
-    // save current.next (2) to variable (temp) 
         let temp = curr.next;
-    // set current.next from (2) to prev (null) - effectivly removing all nodes from the end of 2, those nodes are saved in temp 
         curr.next = prev;
-    // prev = current (1) 
         prev = curr;
-    // current = temp (old 2 with next nodes) 
         curr = temp;
-    // loop again with new saved data 
     };
-    // return prev
     return prev;
 }
 // Time of O(n)
