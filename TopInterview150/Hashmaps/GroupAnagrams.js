@@ -40,7 +40,7 @@ let strs = ["eat","tea","tan","ate","nat","bat"]
 console.log(groupAnagrams(strs))
 
 
-var groupAnagrams = function(strs) {
+var groupAnagrams2 = function(strs) {
     const res = {};
 
     for (let str of strs) {
