@@ -61,10 +61,57 @@ let severity: "info" | "warning" | "error"
 // in the above example when using this function, it will only accept one input, not two, and we could capitalize 
 // the severity or mutate it in other ways within the function if we wished
 
-// String litterals are subtypes of string.  We could also extract them like this:
+// String litterals are subtypes of string.  We could also extract them like this with a type keyword
 type Severity = "info" | "warning" | "error";
 
-export function logSystemEvent2(event: string, severity: Severity): string {
+function logSystemEvent2(event: string, severity: Severity): string {
   return `SYSTEM ${severity.toUpperCase()}: ${event}`;
 };
 // We would take in a prop of Severity, inwhich the input could only be one of the three options
+
+// Above we created a type keyword - an alias type
+type LoggerCallback = (s1: string, s2: string) => string;
+// This is a basic function that takes in two strings and returns a string.  It can be used as a callback function 
+// Any time that we need to use this specific type of function 
+function setLoggerTimeout(loggerCallback: LoggerCallback, delay: number) {
+    // do something
+    // This way we can clean up what we are seeing and make the code easier to read as well as reusable
+    // In the future if we want to change it we only have to modify the type declaration
+};
+
+
+// Higher order Functions
+type SupportResponse = (name: string) => string;
+
+// with these functions we are utilizing SupportResponse as a style guide
+function greetCustomer(name: string) {
+    return `Hello ${name}, welcome to Support.ai! How can I assist you today?`;
+};
+function farewellCustomer(name: string) {
+    return `Goodbye ${name}, have a great day!`;
+};
+
+// These functions are going to be the functions which can be accessed with the SupportResponse Alias
+// We create a higher level function to access those function through SupportResponse
+function handleResponse(fn: SupportResponse) {
+    console.log(fn("Aubrie"))
+};
+// Now we can access the lower level functions that we based off ofthe support structure
+handleResponse(greetCustomer);
+handleResponse(farewellCustomer);
+
+// This information is vital in preperation for these types of patterns:
+const responses: SupportResponse[] = [
+    greetCustomer,
+    farewellCustomer,
+];
+// in the above responses, every function takes (name: string) and every function returns a string
+// we can access these functions and their responses with the index within the array or by mapping through them
+// We could also store them as keyed objects so we can easily access them
+const responsesMap: Record<string, SupportResponse> = {
+    greet: greetCustomer,
+    farewell: farewellCustomer,
+}
+// so now we can grab the functions without the index which could fall apart quickly with changes
+responsesMap["greet"]("Aubrie");
+responsesMap["farewell"]("Aubrie")
