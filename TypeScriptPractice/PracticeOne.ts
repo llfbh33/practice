@@ -108,10 +108,43 @@ const responses: SupportResponse[] = [
 // in the above responses, every function takes (name: string) and every function returns a string
 // we can access these functions and their responses with the index within the array or by mapping through them
 // We could also store them as keyed objects so we can easily access them
-const responsesMap: Record<string, SupportResponse> = {
-    greet: greetCustomer,
-    farewell: farewellCustomer,
-}
-// so now we can grab the functions without the index which could fall apart quickly with changes
-responsesMap["greet"]("Aubrie");
-responsesMap["farewell"]("Aubrie")
+
+
+// const responsesMap: Record<string, SupportResponse> = {   -- Here we are just putting string as a type, this will give us an error
+//     greet: greetCustomer,                                -- because there is the possibility that it will be undefined
+//     farewell: farewellCustomer,
+// }
+// // so now we can grab the functions without the index which could fall apart quickly with changes
+// responsesMap["greet"]("Aubrie");
+// responsesMap["farewell"]("Aubrie")
+
+// We could also do type-safe keys  
+type ResponseType2 = "greet" | "farewell";                  // --- we need to make sure that there are specific values
+
+const responsesMap2: Record<ResponseType2, SupportResponse> = { // use types as types, like string or number
+  greet: greetCustomer,
+  farewell: farewellCustomer
+};
+// our Record will be a key value pair of not just strings and functions, but only strings and functions
+// which are currently stored within ResponseType2 and functions which match the format of SupportResponse
+
+
+// Importing types
+// We can import types directly from a module, and should, so it does not generate extra code if converting
+// JavaScript to TypeScript
+// import { User, Post } from "./models";
+// instead of the above, we would add type before the imports
+// import type { User, Post } from "./models";
+// The reason we add they type even though we do not technically have to is so that when the tsc is compiling
+// the code, it knows that the import is not a variable, function, or file.  It is not necessary to 
+// reproduce this import when compiling into JavaScript.  All TypeScript code is static code, or it is
+// a statically typed language.  The tsc Traspiles the TypeScript code into plain JavaScript before it is executed
+
+
+// Type Narrowing
+// You can use the | pipe / union to set multiple types to a variable.  
+let userId: string | number;
+userId = "user_42";
+userId = 42;
+
+console.log(userId)
