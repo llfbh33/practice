@@ -148,3 +148,17 @@ userId = "user_42";
 userId = 42;
 
 console.log(userId)
+
+
+// You can provide optional parameters by following it with a ?
+// all optional parameters will be required to come last 
+function helloThere(firstName: string, lastName?: string) {
+    if (lastName) {
+        return `Hello there ${firstName} ${lastName}`;
+    };
+    return `Hello there ${firstName}`;
+};
+
+console.log(helloThere('Aubrie'))
+console.log(helloThere('Aubrie Woodbine'))
+
