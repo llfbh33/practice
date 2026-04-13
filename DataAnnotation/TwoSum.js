@@ -21,19 +21,18 @@
 
 */
 
-const twosum = (nums, target) => {
+const twoSum = (nums, target) => {
     let visited = new Map();
 
     for (let i = 0; i < nums.length; i++) {
         let diff = target - nums[i];
 
         if (visited.has(diff)) {
-            const index = visited.get(diff);
-            return [index, i];
+            return [visited.get(diff), i];
         };
         visited.set(nums[i], i);
     };
-    return;
+    return null;
 };
 
 // Time of O(n) - In the worst case, we iterate through the array once, and each lookup in the map is O(1), so the overall time is linear.
