@@ -25,5 +25,8 @@ return result
 */
 
 const subString = (n) => {
-    
+    const result = 0;
+    const variable = 0;
+
+    return result;
 }
