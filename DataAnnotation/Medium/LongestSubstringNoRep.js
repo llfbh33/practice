@@ -51,6 +51,16 @@ const lengthOfLongestSubstring = (s) => {
 
     return max;
 };
+// Time of O(n) Looked at all the elements of the string once
+// Space of O(min(n, charset))
+
+// If there were over a million char in the string or even over 128 space would be O(1)
+// That is because it would be bound by the possible ASSII characters, constant
+// but less than that is O(n) or O(min(n, charset))
+// because the actual space is dependant on whichever is smaller, the length of the string
+// or the amount of char in ASCII or a char set that might be included
+
+
 
 // let string = 'a b c a b d b q r s a a u';    // 5   
 
