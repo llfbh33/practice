@@ -61,3 +61,13 @@ const groupAnagrams = (strs) => {
 let strs =
 ["eat","tea","tan","ate","nat","bat"];
 console.log(groupAnagrams(strs));
+
+
+/*
+The above solution is the optimal solve in an O(n) however we could also solve this
+using a sort to sort the characters in each string and use the sorted string as
+the map key.  This version is less optimal because the Time would be closer to O(n log n)
+due to using sort
+
+
+*/

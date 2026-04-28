@@ -18,6 +18,7 @@ newNext is our pointer holding a node outside of the list all other pointers wor
 
 */
 
+// personal solve - tracks head as it moves nodes to the front
 const reverseList = (head) => {
     if (!head) return head;
 
@@ -29,6 +30,27 @@ const reverseList = (head) => {
         post.next = prev;
         prev = post;
         post = head.next;
+    }
+
+    return prev;
+};
+
+// Time of O(n) we will loop n times
+// Space of O(1) we are mutating in place
+
+
+// more widely used solve - walks through the list flipping nodes to the front as they are viewed 
+const reverseList2 = (head) => {
+    if (head === null) return null;
+
+    let prev = null;
+    let curr = head;
+
+    while (curr) {
+        let nextTemp = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = nextTemp;
     }
 
     return prev;
